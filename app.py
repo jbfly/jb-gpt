@@ -5,7 +5,7 @@ import os
 from OpenSSL import SSL
 from flask_limiter import Limiter
 
-app = Flask(__name__, static_url_path="", static_folder="/srv/http/chatgpt")
+app = Flask(__name__, static_url_path="", static_folder="/srv/http/jb-gpt")
 
 # Initialize the Limiter
 """ limiter = Limiter(
@@ -43,7 +43,7 @@ def chat():
 
 @app.route('/')
 def index():
-    return send_from_directory("/srv/http/chatgpt", "index.html")
+    return send_from_directory("/srv/http/jb-gpt", "index.html")
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=2087)
