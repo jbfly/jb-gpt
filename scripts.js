@@ -6,7 +6,10 @@ function setTheme(themeName) {
     document.body.className = themeName;
 }
 
+// Call the function to load conversation history when the page is loaded
 document.addEventListener("DOMContentLoaded", function () {
+    loadConversationHistory();
+    displayConversationHistory(); // Add this line to display the loaded conversation history
     const themeSelector = document.createElement("select");
     themeSelector.id = "theme-selector";
 
@@ -15,8 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
         { name: "Plain White", value: "plain-white" },
         { name: "Google-style", value: "google-style" },
     ];
-    
-    
+
+
     themes.forEach((theme) => {
         const option = document.createElement("option");
         option.value = theme.value;
@@ -49,6 +52,8 @@ async function sendChatMessage(e) {
         document.getElementById("chat-output").appendChild(messageElement);
 
         conversationHistory.push({ role: "user", content: message });
+        saveConversationHistory(); // Save the conversation history to local storage
+
         document.getElementById("loading-indicator").style.display = "block";
 
         try {
@@ -70,6 +75,7 @@ async function sendChatMessage(e) {
             const data = await response.json();
             let aiMessage = data.message;
             conversationHistory.push({ role: "assistant", content: aiMessage });
+            saveConversationHistory(); // Save the conversation history to local storage
 
             let aiMessageElement = document.createElement("div");
             aiMessageElement.className = "ai-message";
@@ -90,6 +96,8 @@ document.getElementById("message-form").addEventListener("submit", sendChatMessa
 
 document.getElementById("new-conversation-btn").addEventListener("click", function () {
     conversationHistory = [];
+    saveConversationHistory(); // Save the conversation history to local storage
+
     document.getElementById("chat-output").innerHTML = "";
 });
 
@@ -108,3 +116,31 @@ messageInput.addEventListener("keydown", (e) => {
         autoResizeInput(messageInput, 8);
     }
 });
+
+// Saving conversation history to local storage
+function saveConversationHistory() {
+    localStorage.setItem("conversationHistory", JSON.stringify(conversationHistory));
+}
+
+// Loading conversation history from local storage
+function loadConversationHistory() {
+    const storedHistory = localStorage.getItem("conversationHistory");
+    if (storedHistory) {
+        conversationHistory = JSON.parse(storedHistory);
+    } else {
+        conversationHistory = [];
+    }
+}
+
+function displayConversationHistory() {
+    const chatOutput = document.getElementById("chat-output");
+    chatOutput.innerHTML = "";
+
+    conversationHistory.forEach((message) => {
+        let messageElement = document.createElement("div");
+        messageElement.className = message.role === "user" ? "user-message" : "ai-message";
+        messageElement.textContent = `${message.role === "user" ? "You" : "AI"}: ${message.content}`;
+        chatOutput.appendChild(messageElement);
+    });
+}
+
