@@ -107,15 +107,24 @@ function autoResizeInput(inputElement, maxRows) {
     inputElement.style.height = 20 * numRows + "px"; // Set the new height based on the number of rows
 }
 
+
 const messageInput = document.getElementById("message-input");
+
+const messageForm = document.getElementById("message-form"); // Add this line to get the message form
+
 messageInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-        e.preventDefault();
-        messageForm.dispatchEvent(new Event("submit"));
-    } else {
-        autoResizeInput(messageInput, 8);
+    autoResizeInput(messageInput, 8);
+
+    if (e.key === "Enter") {
+        if (!e.shiftKey) {
+            e.preventDefault();
+            messageForm.dispatchEvent(new Event("submit"));
+        }
     }
 });
+
+
+
 
 // Saving conversation history to local storage
 function saveConversationHistory() {
