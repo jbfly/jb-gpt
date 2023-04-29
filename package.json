@@ -1,0 +1,28 @@
+{
+  "name": "jb-gpt",
+  "version": "1.0.0",
+  "description": "jb-gpt is a simple web-based application that demonstrates the capabilities of OpenAI's GPT-3.5-turbo model in a chat-based interface. It features a Flask server for backend API requests and a basic frontend using HTML, CSS, and JavaScript.",
+  "main": "scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbfly/jb-gpt.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbfly/jb-gpt/issues"
+  },
+  "homepage": "https://github.com/jbfly/jb-gpt#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mysql2": "^3.2.4"
+  }
+}
