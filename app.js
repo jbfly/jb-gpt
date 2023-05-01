@@ -15,8 +15,8 @@ const port = process.env.PORT || 3001;
 // Replace the credentials and database name with your own
 const db = mysql.createPool({
   host: 'localhost',
-  user: 'your_database_user',
-  password: 'your_database_password',
+  user: 'jb-gpt',
+  password: 'j4xinuKRSoDy%UajG',
   database: 'chatbot_server',
 });
 

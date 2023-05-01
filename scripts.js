@@ -1,6 +1,9 @@
-const SERVER_URL = "https://bonewitz.net/chatgpt";
+const SERVER_URL = "https://bonewitz.net:3001";
 
-let conversationHistory = [];
+
+let conversationH
+
+istory = [];
 
 function setTheme(themeName) {
     document.body.className = themeName;
@@ -152,4 +155,74 @@ function displayConversationHistory() {
         chatOutput.appendChild(messageElement);
     });
 }
+
+// Register form submission
+document.getElementById("register-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const username = document.getElementById("register-username").value;
+    const password = document.getElementById("register-password").value;
+
+    try {
+        const response = await fetch(SERVER_URL + "/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+            }),
+        });
+
+        if (response.ok) {
+            // Show an alert or update the page with a success message
+            alert("Registration successful! Please log in.");
+        } else {
+            throw new Error("Registration failed");
+        }
+
+        const data = await response.json();
+        alert(data.message);
+    } catch (error) {
+        console.error("Error in registering user:", error);
+        alert("Registration failed");
+    }
+});
+
+// Login form submission
+document.getElementById("login-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const username = document.getElementById("login-username").value;
+    const password = document.getElementById("login-password").value;
+
+    try {
+        const response = await fetch(SERVER_URL + "/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+            }),
+        });
+
+
+
+        if (!response.ok) {
+            throw new Error("Login failed");
+        }
+
+        const data = await response.json();
+        localStorage.setItem("token", data.token);
+
+        // Hide the auth-container and display the chat-container
+        document.getElementById("auth-container").style.display = "none";
+        document.getElementById("chat-container").style.display = "block";
+    } catch (error) {
+        console.error("Error in logging in user:", error);
+        alert("Login failed");
+    }
+});
+
 

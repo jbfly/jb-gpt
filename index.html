@@ -11,7 +11,24 @@
 </head>
 
 <body>
-
+    <div id="auth-container">
+        <form id="register-form">
+            <h2>Register</h2>
+            <label for="register-username">Username:</label>
+            <input type="text" id="register-username" required>
+            <label for="register-password">Password:</label>
+            <input type="password" id="register-password" required>
+            <button type="submit">Register</button>
+        </form>
+        <form id="login-form">
+            <h2>Login</h2>
+            <label for="login-username">Username:</label>
+            <input type="text" id="login-username" required>
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
     <div id="chat-container">
         <div id="chat-output"></div>
         <div id="loading-indicator" style="display: none;">
