@@ -3,20 +3,9 @@ from flask_cors import CORS
 import openai
 import os
 from OpenSSL import SSL
-from flask_limiter import Limiter
 
 app = Flask(__name__, static_url_path="", static_folder="/srv/http/jb-gpt")
-
-# Initialize the Limiter
-""" limiter = Limiter(
-    app,
-    key_func=lambda: request.remote_addr,  # Use the user's IP address as the key
-    default_limits=[["100 per day"], ["10 per minute"]],  # Limit requests per user
-    strategy="fixed-window"
-) """
-
-
-
+qqq
 CORS(app, origins=["https://bonewitz.net"])
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
