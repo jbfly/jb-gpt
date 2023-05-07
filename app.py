@@ -24,13 +24,17 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 def chat():
     data = request.json
     messages = data.get("messages")
+    model = data.get("model", "gpt-3.5-turbo")  # Get the model from the request, default to "gpt-3.5-turbo"
+    print("Selected model:", model)  # debug
+
+
     print(request.json)
 
     if not messages:
         return jsonify({"error": "Missing messages parameter"}), 400
     
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",  
+        model=model,#Use the selected model
         messages=messages,
         temperature=0.7
     )

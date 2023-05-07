@@ -1,15 +1,14 @@
 const SERVER_URL = "https://bonewitz.net/chatgpt";
 
-let conversationHistory = [];
+let conversationHistory;
 
 function setTheme(themeName) {
     document.body.className = themeName;
 }
 
-// Call the function to load conversation history when the page is loaded
 document.addEventListener("DOMContentLoaded", function () {
     loadConversationHistory();
-    displayConversationHistory(); // Add this line to display the loaded conversation history
+    displayConversationHistory();
     const themeSelector = document.createElement("select");
     themeSelector.id = "theme-selector";
 
@@ -18,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
         { name: "Plain White", value: "plain-white" },
         { name: "Google-style", value: "google-style" },
     ];
-
 
     themes.forEach((theme) => {
         const option = document.createElement("option");
@@ -31,20 +29,25 @@ document.addEventListener("DOMContentLoaded", function () {
         setTheme(event.target.value);
     });
 
-    // Set the default theme
     setTheme("groovy");
 
-    // Add the theme selector to the desired location on the page
-    const body = document.body;
-    body.insertBefore(themeSelector, body.firstChild);
+    const chatContainer = document.getElementById("chat-container");
+    chatContainer.parentNode.insertBefore(themeSelector, chatContainer);
+
+    // Add the model selector
+    const modelSelector = document.createElement("select");
+    modelSelector.id = "model-selector";
+    modelSelector.innerHTML = `
+        <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+        <option value="gpt-4">GPT-4</option>
+    `;
+    chatContainer.parentNode.insertBefore(modelSelector, chatContainer.nextSibling);
 });
-
-
-// ... (rest of the code remains the same)
 
 async function sendChatMessage(e) {
     e.preventDefault();
     const message = messageInput.value.trim();
+    const model = document.getElementById("model-selector").value; // Get the selected model from the dropdown
     if (message !== "") {
         let messageElement = document.createElement("div");
         messageElement.className = "user-message";
@@ -52,9 +55,11 @@ async function sendChatMessage(e) {
         document.getElementById("chat-output").appendChild(messageElement);
 
         conversationHistory.push({ role: "user", content: message });
-        saveConversationHistory(); // Save the conversation history to local storage
+        saveConversationHistory();
 
         document.getElementById("loading-indicator").style.display = "block";
+
+        const model = document.getElementById("model-selector").value;
 
         try {
             console.log(JSON.stringify({ messages: conversationHistory }));
@@ -64,7 +69,8 @@ async function sendChatMessage(e) {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    messages: conversationHistory
+                    messages: conversationHistory,
+                    model: model
                 })
             });
 
@@ -75,13 +81,12 @@ async function sendChatMessage(e) {
             const data = await response.json();
             let aiMessage = data.message;
             conversationHistory.push({ role: "assistant", content: aiMessage });
-            saveConversationHistory(); // Save the conversation history to local storage
+            saveConversationHistory();
 
             let aiMessageElement = document.createElement("div");
             aiMessageElement.className = "ai-message";
             aiMessageElement.textContent = `AI: ${aiMessage}`;
             document.getElementById("chat-output").appendChild(aiMessageElement);
-            // Hide the loading indicator
             document.getElementById("loading-indicator").style.display = "none";
 
         } catch (error) {
@@ -96,21 +101,19 @@ document.getElementById("message-form").addEventListener("submit", sendChatMessa
 
 document.getElementById("new-conversation-btn").addEventListener("click", function () {
     conversationHistory = [];
-    saveConversationHistory(); // Save the conversation history to local storage
-
+    saveConversationHistory();
     document.getElementById("chat-output").innerHTML = "";
 });
 
 function autoResizeInput(inputElement, maxRows) {
-    inputElement.style.height = "auto"; // Temporarily set height to auto to calculate the right scroll height
-    const numRows = Math.min(inputElement.scrollHeight / 20, maxRows); // Calculate the number of rows, limited by maxRows
-    inputElement.style.height = 20 * numRows + "px"; // Set the new height based on the number of rows
+    inputElement.style.height = "auto";
+    const numRows = Math.min(inputElement.scrollHeight / 20, maxRows);
+    inputElement.style.height = 20 * numRows + "px";
 }
-
 
 const messageInput = document.getElementById("message-input");
 
-const messageForm = document.getElementById("message-form"); // Add this line to get the message form
+const messageForm = document.getElementById("message-form");
 
 messageInput.addEventListener("keydown", (e) => {
     autoResizeInput(messageInput, 8);
@@ -123,15 +126,10 @@ messageInput.addEventListener("keydown", (e) => {
     }
 });
 
-
-
-
-// Saving conversation history to local storage
 function saveConversationHistory() {
     localStorage.setItem("conversationHistory", JSON.stringify(conversationHistory));
 }
 
-// Loading conversation history from local storage
 function loadConversationHistory() {
     const storedHistory = localStorage.getItem("conversationHistory");
     if (storedHistory) {
@@ -152,4 +150,3 @@ function displayConversationHistory() {
         chatOutput.appendChild(messageElement);
     });
 }
-
