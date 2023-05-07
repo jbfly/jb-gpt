@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Set the default theme
-    setTheme("google-style");
+    setTheme("groovy");
 
     // Add the theme selector to the desired location on the page
     const body = document.body;
