@@ -5,7 +5,6 @@ import os
 from OpenSSL import SSL
 
 app = Flask(__name__, static_url_path="", static_folder="/srv/http/jb-gpt")
-qqq
 CORS(app, origins=["https://bonewitz.net"])
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
