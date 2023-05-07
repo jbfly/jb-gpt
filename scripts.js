@@ -59,7 +59,6 @@ async function sendChatMessage(e) {
 
         document.getElementById("loading-indicator").style.display = "block";
 
-        const model = document.getElementById("model-selector").value;
 
         try {
             console.log(JSON.stringify({ messages: conversationHistory }));
@@ -89,7 +88,9 @@ async function sendChatMessage(e) {
             document.getElementById("chat-output").appendChild(aiMessageElement);
             document.getElementById("loading-indicator").style.display = "none";
 
-        } catch (error) {
+        } 
+
+        catch (error) {
             console.error("Error in sending chat message:", error);
         }
         messageInput.value = "";
