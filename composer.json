@@ -1,7 +1,7 @@
 {
     "require": {
-        "orhanerday/open-ai": "^4.7",
-        "slim/slim": "^4.0",
-        "slim/psr7": "^1.6"
+        "orhanerday/open-ai": "*",
+      "ext-json": "*",
+      "ext-sqlite3": "*"
     }
 }
