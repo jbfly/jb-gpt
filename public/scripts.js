@@ -1,4 +1,4 @@
-const SERVER_URL = "https://bonewitz.net/chatgpt";
+const SERVER_URL = "http://bonewitz.local/app.php";
 
 let conversationHistory;
 
