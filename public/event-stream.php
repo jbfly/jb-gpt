@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/vendor/autoload.php'; // remove this line if you use a PHP Framework.
+require __DIR__ . '/../vendor/autoload.php'; // remove this line if you use a PHP Framework.
 
 use Orhanerday\OpenAi\OpenAi;
 
@@ -11,7 +11,7 @@ const SYS = "system";
 const ASSISTANT = "assistant";
 
 //$open_ai_key = getenv('OPENAI_API_KEY');
-$open_ai_key = $_env['OPENAI_API_KEY'];
+$open_ai_key = $_ENV['OPENAI_API_KEY'];
 error_log('API Key: ' . $open_ai_key); // debug
 $open_ai = new OpenAi($open_ai_key);
 // Open the SQLite database

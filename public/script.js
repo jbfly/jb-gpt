@@ -64,7 +64,7 @@ msgerForm.addEventListener("submit", event => {
 function getHistory() {
     var formData = new FormData();
     formData.append('user_id', USER_ID);
-    fetch('/api.php', {method: 'POST', body: formData})
+    fetch('./api.php', {method: 'POST', body: formData})
         .then(response => response.json())
         .then(chatHistory => {
             for (const row of chatHistory) {
@@ -100,11 +100,11 @@ function sendMsg(msg) {
     var formData = new FormData();
     formData.append('msg', msg);
     formData.append('user_id', USER_ID);
-    fetch('/send-message.php', {method: 'POST', body: formData})
+    fetch('./send-message.php', {method: 'POST', body: formData})
         .then(response => response.json())
         .then(data => {
             let uuid = uuidv4()
-            const eventSource = new EventSource(`/event-stream.php?chat_history_id=${data.id}&id=${encodeURIComponent(USER_ID)}`);
+            const eventSource = new EventSource(`./event-stream.php?chat_history_id=${data.id}&id=${encodeURIComponent(USER_ID)}`);
             appendMessage(BOT_NAME, BOT_IMG, "left", "", uuid);
             const div = document.getElementById(uuid);
 
