@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 
-<body>
+<body class="groovy">
 <!-- History feature
 <div class="sidebar">
   <p class="tablink sidebar-header">Create Chat</h2>
@@ -26,7 +26,8 @@
         </div>
         <div class="msger-header-options">
             <button id="delete-button">Delete History</button>
-        </div>
+            <button id="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+          </div>
     </header>
 
     <main class="msger-chat">

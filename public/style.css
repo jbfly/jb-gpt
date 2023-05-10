@@ -1,10 +1,4 @@
-:root {
-  --body-bg: #202123;
-  --msger-bg: #444654;
-  --border: 2px solid #1e1e1e;
-  --left-msg-bg: #8b8da9;
-  --right-msg-bg: #16171c;
-}
+
 
 html {
   box-sizing: border-box;
@@ -219,3 +213,62 @@ body {
   text-decoration: underline;
   cursor: pointer;
 }
+
+:root {
+  --body-bg: #202123;
+  --msger-bg: #444654;
+  --border: 2px solid #1e1e1e;
+  --left-msg-bg: #8b8da9;
+  --right-msg-bg: #16171c;
+}
+
+
+/* Groovy theme styles */
+body.groovy {
+  --body-bg: #ff99ff;
+  --msger-bg: #ffccff;
+  --border: 2px solid #cc66cc;
+  --left-msg-bg: #cc99ff;
+  --right-msg-bg: #ff66cc;
+}
+
+.groovy .msger-header {
+  background-color: #f1c40f;
+  color: #0c2461;
+}
+
+.groovy .msger-chat {
+  background-color: #0c2461;
+}
+
+.groovy .left-msg .msg-bubble {
+  background-color: #FF69B4; /* Hot pink */
+  color: #0c2461;
+  font-weight: bold;
+}
+
+.groovy .right-msg .msg-bubble {
+  background-color: #00FF00; /* Lime green */
+  color: #0c2461;
+  font-weight: bold;
+}
+
+.groovy .msger-inputarea {
+  background-color: #f1c40f;
+}
+
+.groovy .msger-input {
+  background-color: #0c2461;
+  color: #f1c40f;
+}
+
+.groovy .msger-send-btn {
+  background-color: #f1c40f;
+  color: #0c2461;
+}
+
+.groovy .msger-send-btn:hover {
+  background-color: #d9b310;
+}
+
+
