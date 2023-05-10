@@ -225,7 +225,7 @@ body {
 
 /* Groovy theme styles */
 body.groovy {
-  --body-bg: #ff99ff;
+  --body-bg: #0c2461;
   --msger-bg: #ffccff;
   --border: 2px solid #cc66cc;
   --left-msg-bg: #cc99ff;
@@ -243,18 +243,18 @@ body.groovy {
 
 .groovy .left-msg .msg-bubble {
   background-color: #FF69B4; /* Hot pink */
-  color: #0c2461;
+  color: #000000;
   font-weight: bold;
 }
 
 .groovy .right-msg .msg-bubble {
   background-color: #00FF00; /* Lime green */
-  color: #0c2461;
+  color: #000000;
   font-weight: bold;
 }
 
 .groovy .msger-inputarea {
-  background-color: #f1c40f;
+  background-color: #FF69B4;
 }
 
 .groovy .msger-input {

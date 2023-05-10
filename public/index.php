@@ -21,7 +21,7 @@
 <section class="msger">
     <header class="msger-header">
         <div class="msger-header-title">
-            <i class="fas fa-comment-alt"></i> ChatGPT
+            <i class="fas fa-comment-alt"></i> JB-GPT
             &nbsp;| ID: <input type="text" id="id" hidden> <span class="id_session"></span>
         </div>
         <div class="msger-header-options">
