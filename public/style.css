@@ -233,8 +233,8 @@ body.groovy {
 }
 
 .groovy .msger-header {
-  background-color: #f1c40f;
-  color: #0c2461;
+  background-color:#0c2461 ;
+  color: #f1c40f;
 }
 
 .groovy .msger-chat {
