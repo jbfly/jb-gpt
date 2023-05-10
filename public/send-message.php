@@ -6,7 +6,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     // Create a new SQLite database connection
-    $db = new SQLite3('db.sqlite');
+    $db = new SQLite3(__DIR__ . '/../db.sqlite');
+
     // Prepare the INSERT statement
     $stmt = $db->prepare('INSERT INTO main.chat_history (user_id, human) VALUES (:user_id, :human)');
 

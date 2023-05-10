@@ -1,8 +1,10 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
 
-require __DIR__ . '/../vendor/autoload.php'; // remove this line if you use a PHP Framework.
-
+//require __DIR__ . '/../vendor/autoload.php'; // remove this line if you use a PHP Framework.
 use Orhanerday\OpenAi\OpenAi;
+
+use Dotenv\Dotenv;
 
 const ROLE = "role";
 const CONTENT = "content";
@@ -10,12 +12,16 @@ const USER = "user";
 const SYS = "system";
 const ASSISTANT = "assistant";
 
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
+
 //$open_ai_key = getenv('OPENAI_API_KEY');
 $open_ai_key = $_ENV['OPENAI_API_KEY'];
 error_log('API Key: ' . $open_ai_key); // debug
 $open_ai = new OpenAi($open_ai_key);
 // Open the SQLite database
-$db = new SQLite3('db.sqlite');
+$db = new SQLite3(__DIR__ . '/../db.sqlite');
 
 $chat_history_id = $_GET['chat_history_id'];
 $id = $_GET['id'];
@@ -41,7 +47,7 @@ $opts = [
     'model' => 'gpt-4',
     'messages' => $history,
     'temperature' => 1.0,
-    'max_tokens' => 100,
+    'max_tokens' => 1000,
     'frequency_penalty' => 0,
     'presence_penalty' => 0,
     'stream' => true

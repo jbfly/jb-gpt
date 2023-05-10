@@ -2,7 +2,7 @@
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Create a new SQLite database connection
-    $db = new SQLite3('db.sqlite');
+    $db = new SQLite3(__DIR__ . '/../db.sqlite');
 
     // Get the user ID from the request data
     $user_id = $_POST['user_id'];
