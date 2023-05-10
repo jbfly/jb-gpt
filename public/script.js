@@ -28,7 +28,7 @@ function deleteChatHistory(userId) {
         return false
     }
 
-    fetch('/api.php?user=' + USER_ID, {
+    fetch('./api.php?user=' + USER_ID, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'}
     })

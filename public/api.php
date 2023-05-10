@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $user_id = $_GET['user'];
 
     // Create a new SQLite database connection
-    $db = new SQLite3('db.sqlite');
+    $db = new SQLite3(__DIR__ . '/../db.sqlite');
 
     // Prepare and execute a DELETE statement to delete chat history records for the specified user ID
     $stmt = $db->prepare('DELETE FROM chat_history WHERE user_id = :user_id');
