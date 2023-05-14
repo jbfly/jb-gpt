@@ -1,4 +1,9 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+header('Content-Type: text/event-stream');
+//error_reporting(E_ALL);
+error_log('event-stream.php called');//debug log remove later
 require_once __DIR__ . '/../vendor/autoload.php';
 
 //require __DIR__ . '/../vendor/autoload.php'; // remove this line if you use a PHP Framework.
@@ -12,7 +17,7 @@ const USER = "user";
 const SYS = "system";
 const ASSISTANT = "assistant";
 
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv = Dotenv::createMutable(__DIR__ . '/../');
 $dotenv->load();
 
 
@@ -41,6 +46,8 @@ $stmt->bindValue(':id', $chat_history_id, SQLITE3_INTEGER);
 $result = $stmt->execute();
 $msg = $result->fetchArray(SQLITE3_ASSOC)['human'];
 
+error_log('User message: ' . $msg); //debug log, remove this later
+
 $history[] = [ROLE => USER, CONTENT => $msg];
 
 $opts = [
@@ -53,10 +60,11 @@ $opts = [
     'stream' => true
 ];
 
-header('Content-type: text/event-stream');
+//header('Content-type: text/event-stream');
 header('Cache-Control: no-cache');
 $txt = "";
 $complete = $open_ai->chat($opts, function ($curl_info, $data) use (&$txt) {
+    error_log('Response from OpenAI: ' . $txt); //debug log, remove this later
     if ($obj = json_decode($data) and $obj->error->message != "") {
         error_log(json_encode($obj->error->message));
     } else {

@@ -1,4 +1,6 @@
 <?php
+//echo 'Test output';//remove this line after testing
+error_log('send-message.php called'); //debug
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['user_id'];

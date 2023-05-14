@@ -104,7 +104,7 @@ function sendMsg(msg) {
         .then(response => response.json())
         .then(data => {
             let uuid = uuidv4()
-            const eventSource = new EventSource(`./event-stream.php?chat_history_id=${data.id}&id=${encodeURIComponent(USER_ID)}`);
+            const eventSource = new EventSource(`event-stream.php?chat_history_id=${data.id}&id=${encodeURIComponent(USER_ID)}`);
             appendMessage(BOT_NAME, BOT_IMG, "left", "", uuid);
             const div = document.getElementById(uuid);
 
